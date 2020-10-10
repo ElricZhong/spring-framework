@@ -31,11 +31,15 @@ import org.springframework.lang.Nullable;
  * implementations, drawing configuration from XML documents containing bean definitions
  * understood by an {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}.
  *
+ * 它是实现了ApplicationContext的一个基类，它可以通过XmlBeanDefinitionReader来读取XML文档中包含的bean定义来提取配置。
+ *
  * <p>Subclasses just have to implement the {@link #getConfigResources} and/or
  * the {@link #getConfigLocations} method. Furthermore, they might override
  * the {@link #getResourceByPath} hook to interpret relative paths in an
  * environment-specific fashion, and/or {@link #getResourcePatternResolver}
  * for extended pattern resolution.
+ *
+ * 它的子类可以去实现getConfigResources() 和/或 getConfigLocations()。此外，他们可能覆盖getResourceByPath()来解析特定环境下相对路径，和/或 覆盖getResourcePatternResolver来扩展格式的解析。
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -73,6 +77,9 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
 
 	/**
 	 * Loads the bean definitions via an XmlBeanDefinitionReader.
+	 *
+	 * 通过XmlBeanDefinitionReader来加载bean definitions。
+	 *
 	 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
 	 * @see #initBeanDefinitionReader
 	 * @see #loadBeanDefinitions
@@ -132,8 +139,14 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
 	/**
 	 * Return an array of Resource objects, referring to the XML bean definition
 	 * files that this context should be built with.
+	 *
+	 * 返回了一个资源对象的数组，这些资源对象代表了用于构建上下文的XML bean定义配置文件。
+	 *
 	 * <p>The default implementation returns {@code null}. Subclasses can override
 	 * this to provide pre-built Resource objects rather than location Strings.
+	 *
+	 * 方法默认实现为返回null。子类覆盖它可以在构建上下文前提供资源对象，而不是位置字符串。
+	 *
 	 * @return an array of Resource objects, or {@code null} if none
 	 * @see #getConfigLocations()
 	 */

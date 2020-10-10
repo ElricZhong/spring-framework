@@ -29,10 +29,14 @@ import org.springframework.util.Assert;
  * that include the package path (e.g. "mypackage/myresource.txt"). Useful for
  * test harnesses as well as for application contexts embedded within JARs.
  *
+ * 这个类代表一个独立的xml应用上下文，它可以通过解析代表类路径资源名的文本路径来获取上下文定义文件。
+ *
  * <p>The config location defaults can be overridden via {@link #getConfigLocations},
  * Config locations can either denote concrete files like "/myfiles/context.xml"
  * or Ant-style patterns like "/myfiles/*-context.xml" (see the
  * {@link org.springframework.util.AntPathMatcher} javadoc for pattern details).
+ *
+ * 通过覆盖getConfigLocations()来指定配置文件的位置，配置文件的位置支持具体的文件位置或Ant风格的格式。
  *
  * <p>Note: In case of multiple config locations, later bean definitions will
  * override ones defined in earlier loaded files. This can be leveraged to
@@ -42,6 +46,8 @@ import org.springframework.util.Assert;
  * Consider using the {@link GenericApplicationContext} class in combination
  * with an {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}
  * for more flexible context setup.</b>
+ *
+ * 这是一个简单的、一步到位、方便的应用上下文。
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
