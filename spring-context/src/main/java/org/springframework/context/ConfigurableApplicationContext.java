@@ -169,9 +169,15 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 	 * Load or refresh the persistent representation of the configuration, which
 	 * might be from Java-based configuration, an XML file, a properties file, a
 	 * relational database schema, or some other format.
+	 *
+	 * 加载或刷新代表持久化形式的配置，它可能是基于Java的配置、XML文件，properties文件、一个关系型数据库schema，或者其他格式。
+	 *
 	 * <p>As this is a startup method, it should destroy already created singletons
 	 * if it fails, to avoid dangling resources. In other words, after invocation
 	 * of this method, either all or no singletons at all should be instantiated.
+	 *
+	 * 这里作为一个启动方法，如果失败了它应该销毁已经创建的单例来避免资源虚悬。换句话说，在调用此方法后，应该实例化所有的单例或者不会实例化。
+	 *
 	 * @throws BeansException if the bean factory could not be initialized
 	 * @throws IllegalStateException if already initialized and multiple refresh
 	 * attempts are not supported

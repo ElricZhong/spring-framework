@@ -89,6 +89,8 @@ import org.springframework.util.ReflectionUtils;
  * implements common context functionality. Uses the Template Method design pattern,
  * requiring concrete subclasses to implement abstract methods.
  *
+ * 它是ApplicationContext接口的抽象实现。并不强制用于配置的存储类型；这里简单实现了通用的上下文功能。使用了模板方法的设计模式，需要具体子类来实现这些抽象方法。
+ *
  * <p>In contrast to a plain BeanFactory, an ApplicationContext is supposed
  * to detect special beans defined in its internal bean factory:
  * Therefore, this class automatically registers
@@ -96,6 +98,8 @@ import org.springframework.util.ReflectionUtils;
  * {@link org.springframework.beans.factory.config.BeanPostProcessor BeanPostProcessors},
  * and {@link org.springframework.context.ApplicationListener ApplicationListeners}
  * which are defined as beans in the context.
+ *
+ * 与原生的BeanFactory相比，ApplicationContext用来探测定义在它内部bean factory中的特殊bean：因此，这个类能自动注册在上下文中定义为Bean的BeanFactoryPostProcessors, BeanPostProcessors, 和 ApplicationListeners。
  *
  * <p>A {@link org.springframework.context.MessageSource} may also be supplied
  * as a bean in the context, with the name "messageSource"; otherwise, message
@@ -111,6 +115,8 @@ import org.springframework.util.ReflectionUtils;
  * (supporting full class path resource names that include the package path,
  * e.g. "mypackage/myresource.dat"), unless the {@link #getResourceByPath}
  * method is overridden in a subclass.
+ *
+ * 它通过扩展DefaultResourceLoader来实现资源加载。因此，除非在子类中覆盖了getResourceByPath方法，否则将非URL资源路径视为类路径资源（支持包含包路径的完全类路径资源名称，例如“mypackage/myresource.dat”）。
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

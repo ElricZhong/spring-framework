@@ -32,11 +32,15 @@ import org.springframework.lang.Nullable;
  * Typically (but not necessarily), such a context will be driven by
  * a set of config locations to load bean definitions from.
  *
+ * 它是ApplicationContext实现的一个基类，它用来支持多次调用refresh()，每次调用都会创建一个新的内部bean factory。通常这样一个上下文将由一组配置位置来驱动，从中加载bean definitions。
+ *
  * <p>The only method to be implemented by subclasses is {@link #loadBeanDefinitions},
  * which gets invoked on each refresh. A concrete implementation is supposed to load
  * bean definitions into the given
  * {@link org.springframework.beans.factory.support.DefaultListableBeanFactory},
  * typically delegating to one or more specific bean definition readers.
+ *
+ * 它的子类唯一实现的方法就是loadBeanDefinitions，每次调用refresh时，其具体实现都会用来加载bean definitions到给定的DefaultListableBeanFactory，这个过程通常委托给一个或多个指定的bean definition reader。
  *
  * <p><b>Note that there is a similar base class for WebApplicationContexts.</b>
  * {@link org.springframework.web.context.support.AbstractRefreshableWebApplicationContext}
@@ -44,12 +48,16 @@ import org.springframework.lang.Nullable;
  * all context functionality for web environments. There is also a
  * pre-defined way to receive config locations for a web context.
  *
+ * 注意WebApplicationContexts也有一个相似的基类，叫org.springframework.web.context.support.AbstractRefreshableWebApplicationContext，它也提供了相同的子类化策略。但是它额外为web环境预实现了所有的上下文能力。这里有一个预先定义的方式来为web上下文接收配置文件的位置。
+ *
  * <p>Concrete standalone subclasses of this base class, reading in a
  * specific bean definition format, are {@link ClassPathXmlApplicationContext}
  * and {@link FileSystemXmlApplicationContext}, which both derive from the
  * common {@link AbstractXmlApplicationContext} base class;
  * {@link org.springframework.context.annotation.AnnotationConfigApplicationContext}
  * supports {@code @Configuration}-annotated classes as a source of bean definitions.
+ *
+ * 以特定的bean definition格式读取的该基类的具体独立子类有，ClassPathXmlApplicationContext和FileSystemXmlApplicationContext，它们都从abstractXmlApplicationContext基类派生而来。
  *
  * @author Juergen Hoeller
  * @author Chris Beams
@@ -116,6 +124,8 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * This implementation performs an actual refresh of this context's underlying
 	 * bean factory, shutting down the previous bean factory (if any) and
 	 * initializing a fresh bean factory for the next phase of the context's lifecycle.
+	 *
+	 * 这个实现对底层的bean factory执行了实际的刷新，它关闭了上一个bean factory（如果有），然后为该上下文生命周期的下一个阶段初始化了一个崭新的bean factory。
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
