@@ -316,8 +316,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * Return the {@code Environment} for this application context in configurable
 	 * form, allowing for further customization.
+	 *
+	 * 为这个应用上下文返回一个可配置的Environment，并允许后续为它定制化。
+	 *
 	 * <p>If none specified, a default environment will be initialized via
 	 * {@link #createEnvironment()}.
+	 *
+	 * 如果没有指定，将会调用createEnvironment()来初始化一个默认的Environment。
 	 */
 	@Override
 	public ConfigurableEnvironment getEnvironment() {
@@ -331,6 +336,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Create and return a new {@link StandardEnvironment}.
 	 * <p>Subclasses may override this method in order to supply
 	 * a custom {@link ConfigurableEnvironment} implementation.
+	 *
+	 * 创建并返回一个新的StandardEnvironment。
+	 * 子类可以实现这个方法来提供一个自定义的ConfigurableEnvironment实现。
 	 */
 	protected ConfigurableEnvironment createEnvironment() {
 		return new StandardEnvironment();
@@ -523,6 +531,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
+			// 准备上下文来进行刷新，设置其启动时间和激活标记，还有执行一些property source的初始化。
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
@@ -587,9 +596,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * Prepare this context for refreshing, setting its startup date and
 	 * active flag as well as performing any initialization of property sources.
+	 *
+	 * 准备这个上下文来进行刷新，设置其启动时间和激活标记，还有执行一些property source的初始化。
 	 */
 	protected void prepareRefresh() {
 		// Switch to active.
+		// 开启激活状态，这里有三个标记：启动时间、是否关闭、是否激活，理解上不难。
 		this.startupDate = System.currentTimeMillis();
 		this.closed.set(false);
 		this.active.set(true);
@@ -604,10 +616,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment.
+		// 在这个上下文的环境中初始化一些占位符property source。
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		// 验证所有标记为必填的属性都是可以解析的，可以看ConfigurablePropertyResolver#setRequiredProperties。
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
@@ -627,6 +641,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 	/**
 	 * <p>Replace any stub property sources with actual instances.
+	 *
+	 * 用实际实例来代替一些存根property source。
+	 *
 	 * @see org.springframework.core.env.PropertySource.StubPropertySource
 	 * @see org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources
 	 */
