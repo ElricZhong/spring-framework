@@ -69,10 +69,16 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	/**
 	 * Name of property to set to specify active profiles: {@value}. Value may be comma
 	 * delimited.
+	 *
+	 * 设置指定激活配置（spring.profiles.active）的属性的名称。值可以用逗号分割。
+	 *
 	 * <p>Note that certain shell environments such as Bash disallow the use of the period
 	 * character in variable names. Assuming that Spring's {@link SystemEnvironmentPropertySource}
 	 * is in use, this property may be specified as an environment variable as
 	 * {@code SPRING_PROFILES_ACTIVE}.
+	 *
+	 * 某些shell环境（例如Bash）不允许在变量名称中使用句点字符。假设正在使用Spring的SystemEnvironmentPropertySource，则可以将此属性指定为环境变量SPRING_PROFILES_ACTIVE。
+	 *
 	 * @see ConfigurableEnvironment#setActiveProfiles
 	 */
 	public static final String ACTIVE_PROFILES_PROPERTY_NAME = "spring.profiles.active";
@@ -80,10 +86,16 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	/**
 	 * Name of property to set to specify profiles active by default: {@value}. Value may
 	 * be comma delimited.
+	 *
+	 * 设置指定激活配置（spring.profiles.default）的属性的名称。值可以用逗号分割。
+	 *
 	 * <p>Note that certain shell environments such as Bash disallow the use of the period
 	 * character in variable names. Assuming that Spring's {@link SystemEnvironmentPropertySource}
 	 * is in use, this property may be specified as an environment variable as
 	 * {@code SPRING_PROFILES_DEFAULT}.
+	 *
+	 * 某些shell环境（例如Bash）不允许在变量名称中使用句点字符。假设正在使用Spring的SystemEnvironmentPropertySource，则可以将此属性指定为环境变量SPRING_PROFILES_DEFAULT。
+	 *
 	 * @see ConfigurableEnvironment#setDefaultProfiles
 	 */
 	public static final String DEFAULT_PROFILES_PROPERTY_NAME = "spring.profiles.default";
@@ -92,6 +104,9 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	 * Name of reserved default profile name: {@value}. If no default profile names are
 	 * explicitly and no active profile names are explicitly set, this profile will
 	 * automatically be activated by default.
+	 *
+	 * 保留默认配置名是："default"。如果没有显式设置默认配置名和激活配置名，这个配置将默认自动激活。
+	 *
 	 * @see #getReservedDefaultProfiles
 	 * @see ConfigurableEnvironment#setDefaultProfiles
 	 * @see ConfigurableEnvironment#setActiveProfiles
@@ -119,6 +134,8 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	 * allow subclasses to contribute or manipulate {@link PropertySource} instances as
 	 * appropriate.
 	 * @see #customizePropertySources(MutablePropertySources)
+	 *
+	 * 创建一个新的Environment实例，在构造器中通过回调customizePropertySources(MutablePropertySources)来允许子类适当的提供或操作PropertySource示例
 	 */
 	public AbstractEnvironment() {
 		customizePropertySources(this.propertySources);
@@ -207,6 +224,9 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 	 * Return the set of reserved default profile names. This implementation returns
 	 * {@value #RESERVED_DEFAULT_PROFILE_NAME}. Subclasses may override in order to
 	 * customize the set of reserved names.
+	 *
+	 * 返回一组保留默认配置名。这个实现会返回"default"。子类可以覆盖它来自定义保留名。
+	 *
 	 * @see #RESERVED_DEFAULT_PROFILE_NAME
 	 * @see #doGetDefaultProfiles()
 	 */

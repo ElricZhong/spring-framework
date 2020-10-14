@@ -75,9 +75,15 @@ public interface ConfigurableEnvironment extends Environment, ConfigurableProper
 	 * Specify the set of profiles active for this {@code Environment}. Profiles are
 	 * evaluated during container bootstrap to determine whether bean definitions
 	 * should be registered with the container.
+	 *
+	 * 为这个Environment指定激活的配置集合。在容器启动期间，鉴定Profile来决定是否注册bean definition到容器中
+	 *
 	 * <p>Any existing active profiles will be replaced with the given arguments; call
 	 * with zero arguments to clear the current set of active profiles. Use
 	 * {@link #addActiveProfile} to add a profile while preserving the existing set.
+	 *
+	 * 任何已存在的激活配置都将被给定参数替换；使用零参数调用会清空当前活动配置集合。使用addActiveProfile在保留现有集合的同时来添加一个配置。
+	 *
 	 * @throws IllegalArgumentException if any profile is null, empty or whitespace-only
 	 * @see #addActiveProfile
 	 * @see #setDefaultProfiles
@@ -96,6 +102,9 @@ public interface ConfigurableEnvironment extends Environment, ConfigurableProper
 	/**
 	 * Specify the set of profiles to be made active by default if no other profiles
 	 * are explicitly made active through {@link #setActiveProfiles}.
+	 *
+	 * 如果没有通过setActiveProfiles显式激活配置，则指定默认情况下激活这些配置集合。
+	 *
 	 * @throws IllegalArgumentException if any profile is null, empty or whitespace-only
 	 * @see AbstractEnvironment#DEFAULT_PROFILES_PROPERTY_NAME
 	 */
