@@ -22,6 +22,8 @@ import org.springframework.lang.Nullable;
  * {@link PropertyResolver} implementation that resolves property values against
  * an underlying set of {@link PropertySources}.
  *
+ * 针对底层的PropertySources集解析property的值的PropertyResolver实现。
+ *
  * @author Chris Beams
  * @author Juergen Hoeller
  * @since 3.1

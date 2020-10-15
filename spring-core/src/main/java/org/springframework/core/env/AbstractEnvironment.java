@@ -39,11 +39,16 @@ import org.springframework.util.StringUtils;
  * through the {@link #ACTIVE_PROFILES_PROPERTY_NAME} and
  * {@link #DEFAULT_PROFILES_PROPERTY_NAME} properties.
  *
+ * 它是Environment的实现，是一个抽象的基类。它支持保留默认配置文件名称的概念；以及允许通过spring.profiles.active和spring.profiles.default属性来指定激活和默认的配置文件。
+ *
  * <p>Concrete subclasses differ primarily on which {@link PropertySource} objects they
  * add by default. {@code AbstractEnvironment} adds none. Subclasses should contribute
  * property sources through the protected {@link #customizePropertySources(MutablePropertySources)}
  * hook, while clients should customize using {@link ConfigurableEnvironment#getPropertySources()}
  * and working against the {@link MutablePropertySources} API.
+ *
+ * 具体的子类主要区别在于默认情况下添加的PropertySource对象。AbstractEnvironment不添加。子类应通过protected的customPropertySources(MutablePropertySources)钩子来提供属性源；另外一种方式是客户端使用ConfigurableEnvironment.getPropertySources()并使用MutablePropertySources API进行自定义。
+ *
  * See {@link ConfigurableEnvironment} javadoc for usage examples.
  *
  * @author Chris Beams

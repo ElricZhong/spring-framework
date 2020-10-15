@@ -25,6 +25,8 @@ import java.util.Map;
  * conversion service and more through the {@link ConfigurablePropertyResolver}
  * superinterface.
  *
+ * 大多数（如果不是全部）Environment类型都将实现配置接口。它提供设置active和default的profile和操作内部property source的功能。允许客户端去设置和校验必填的属性，通过ConfigurablePropertyResolver超类接口来定制化转换服务以及其他功能。
+ *
  * <h2>Manipulating property sources</h2>
  * <p>Property sources may be removed, reordered, or replaced; and additional
  * property sources may be added using the {@link MutablePropertySources}
@@ -32,6 +34,8 @@ import java.util.Map;
  * are against the {@link StandardEnvironment} implementation of
  * {@code ConfigurableEnvironment}, but are generally applicable to any implementation,
  * though particular default property sources may differ.
+ *
+ * property source可以被移除、重排和替代；可以使用getPropertySources()返回的MutablePropertySources实例来添加额外的property source。下面的例子是使用ConfigurableEnvironment的实现StandardEnvironment，即使它们特定的默认property source不一样，但是对其他实现来说是通用的。
  *
  * <h4>Example: adding a new property source with highest search priority</h4>
  * <pre class="code">
@@ -63,6 +67,8 @@ import java.util.Map;
  * container bootstrap process, including use by {@linkplain
  * org.springframework.context.support.PropertySourcesPlaceholderConfigurer property
  * placeholder configurers}.
+ *
+ * 当一个ApplicationContext使用一个Environment时，在该上下文的refresh()被调用前，执行此类对property source的操作是很重要的。这样保证了在容器启动过程中所有的property source，包括属性占位符配置都是可用的。
  *
  * @author Chris Beams
  * @since 3.1

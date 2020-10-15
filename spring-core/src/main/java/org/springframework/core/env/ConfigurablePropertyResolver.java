@@ -25,6 +25,8 @@ import org.springframework.lang.Nullable;
  * {@link org.springframework.core.convert.ConversionService ConversionService}
  * used when converting property values from one type to another.
  *
+ * 大多数（如果不是全部）PropertyResolver类型都将实现配置接口。提供用于访问和定制ConversionService的功能，在将属性值从一种类型的属性值转换为另一种类型的属性值时会使用到它。
+ *
  * @author Chris Beams
  * @since 3.1
  */
@@ -90,6 +92,8 @@ public interface ConfigurablePropertyResolver extends PropertyResolver {
 	/**
 	 * Specify which properties must be present, to be verified by
 	 * {@link #validateRequiredProperties()}.
+	 *
+	 * 指定哪些属性必须存在，由validateRequiredProperties()来校验。
 	 */
 	void setRequiredProperties(String... requiredProperties);
 
@@ -97,6 +101,9 @@ public interface ConfigurablePropertyResolver extends PropertyResolver {
 	 * Validate that each of the properties specified by
 	 * {@link #setRequiredProperties} is present and resolves to a
 	 * non-{@code null} value.
+	 *
+	 * 校验每个setRequiredProperties()指定必须存在的属性并且它的值是非空的。
+	 *
 	 * @throws MissingRequiredPropertiesException if any of the required
 	 * properties are not resolvable.
 	 */
