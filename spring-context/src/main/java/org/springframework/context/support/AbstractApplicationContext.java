@@ -576,6 +576,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				// 为上下文初始化event multicaster。
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
