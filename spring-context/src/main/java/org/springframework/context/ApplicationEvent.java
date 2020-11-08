@@ -22,6 +22,8 @@ import java.util.EventObject;
  * Class to be extended by all application events. Abstract as it
  * doesn't make sense for generic events to be published directly.
  *
+ * 所有应用事件继承这个类。直接发布通用的事件没有任何意义。
+ *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see org.springframework.context.ApplicationListener
@@ -40,6 +42,7 @@ public abstract class ApplicationEvent extends EventObject {
 	 * Create a new {@code ApplicationEvent}.
 	 * @param source the object on which the event initially occurred or with
 	 * which the event is associated (never {@code null})
+	 * source对象是最初发生这个事件或者与该事件有关的对象
 	 */
 	public ApplicationEvent(Object source) {
 		super(source);
