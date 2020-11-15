@@ -16,62 +16,10 @@
 
 package org.springframework.beans.factory.support;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Method;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.IdentityHashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
-import javax.inject.Provider;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.TypeConverter;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.BeanCurrentlyInCreationException;
-import org.springframework.beans.factory.BeanDefinitionStoreException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.beans.factory.BeanNotOfRequiredTypeException;
-import org.springframework.beans.factory.CannotLoadBeanClassException;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InjectionPoint;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.SmartFactoryBean;
-import org.springframework.beans.factory.SmartInitializingSingleton;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.DependencyDescriptor;
-import org.springframework.beans.factory.config.NamedBeanHolder;
+import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.config.*;
 import org.springframework.core.OrderComparator;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.MergedAnnotation;
@@ -79,30 +27,49 @@ import org.springframework.core.annotation.MergedAnnotations;
 import org.springframework.core.annotation.MergedAnnotations.SearchStrategy;
 import org.springframework.core.log.LogMessage;
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.CompositeIterator;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
+import org.springframework.util.*;
+
+import javax.inject.Provider;
+import java.io.*;
+import java.lang.annotation.Annotation;
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Spring's default implementation of the {@link ConfigurableListableBeanFactory}
  * and {@link BeanDefinitionRegistry} interfaces: a full-fledged bean factory
  * based on bean definition metadata, extensible through post-processors.
  *
+ * ConfigurableListableBeanFactory和BeanDefinitionRegistry在Spring中的默认实现：一个基于bean definition元数据的成熟bean factory，它可以通过post-processor来扩展。
+ *
  * <p>Typical usage is registering all bean definitions first (possibly read
  * from a bean definition file), before accessing beans. Bean lookup by name
  * is therefore an inexpensive operation in a local bean definition table,
  * operating on pre-resolved bean definition metadata objects.
  *
+ * 典型的用法是在获取bean之前，先注册好所有的bean definition（可能从一个bean definition文件读取）。
+ * 因此，在本地bean definition表中通过名称来查找bean的这个操作并不是一个昂贵的操作，它是在预先解析好的bean definition元数据对象上操作的。
+ *
  * <p>Note that readers for specific bean definition formats are typically
  * implemented separately rather than as bean factory subclasses: see for example
  * {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}.
+ *
+ * 请注意，特定的bean definition格式的reader通常是单独实现的，而不是作为bean factory的子类来实现：看XmlBeanDefinitionReader的例子。
  *
  * <p>For an alternative implementation of the
  * {@link org.springframework.beans.factory.ListableBeanFactory} interface,
  * have a look at {@link StaticListableBeanFactory}, which manages existing
  * bean instances rather than creating new ones based on bean definitions.
+ *
+ * 对于ListableBeanFactory接口的替代实现，请查看StaticListableBeanFactory，它管理现有的bean实例，而不是基于bean definition来创建新的bean实例。
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

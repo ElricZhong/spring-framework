@@ -28,12 +28,17 @@ import org.springframework.lang.Nullable;
  * In addition to {@link ConfigurableBeanFactory}, it provides facilities to
  * analyze and modify bean definitions, and to pre-instantiate singletons.
  *
+ * 用于实现大部分列表化（listable）的bean factory配置接口。除了ConfigurableBeanFactory此外，它提供了分析和修改bean definition，和预先实例化单例的能力。
+ *
  * <p>This subinterface of {@link org.springframework.beans.factory.BeanFactory}
  * is not meant to be used in normal application code: Stick to
  * {@link org.springframework.beans.factory.BeanFactory} or
  * {@link org.springframework.beans.factory.ListableBeanFactory} for typical
  * use cases. This interface is just meant to allow for framework-internal
  * plug'n'play even when needing access to bean factory configuration methods.
+ *
+ * 这个BeanFactory的子接口不能用于普通的应用代码中：对于典型用例，要参考BeanFactory和ListableBeanFactory。
+ * 即使需要调用bean factory的配置方法时，这个接口也只允许内部框架插件使用。
  *
  * @author Juergen Hoeller
  * @since 03.11.2003
@@ -51,11 +56,20 @@ public interface ConfigurableListableBeanFactory
 
 	/**
 	 * Ignore the given dependency interface for autowiring.
+	 *
+	 * 忽略对给定的依赖接口进行自动装配。
+	 *
 	 * <p>This will typically be used by application contexts to register
 	 * dependencies that are resolved in other ways, like BeanFactory through
 	 * BeanFactoryAware or ApplicationContext through ApplicationContextAware.
+	 *
+	 * 应用上下文通常会使用它以另外一种方式解决注册依赖，例如通过BeanFactoryAware的BeanFactory或者通过ApplicationContextAware
+	 *
 	 * <p>By default, only the BeanFactoryAware interface is ignored.
 	 * For further types to ignore, invoke this method for each type.
+	 *
+	 * 默认只有BeanFactoryAware接口被忽略。有其他类型需要忽略，需为每个类型调用此方法。
+	 *
 	 * @param ifc the dependency interface to ignore
 	 * @see org.springframework.beans.factory.BeanFactoryAware
 	 * @see org.springframework.context.ApplicationContextAware

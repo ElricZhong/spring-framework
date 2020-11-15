@@ -1,11 +1,8 @@
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+package startup;
 
-/**
- * @author: 邮箱：wb-zfp743816@alibaba-inc.com
- * @create: 2020年10月10日 10:28
- */
-public class Main {
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class ApplicationContextStartup {
 
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring.xml");
@@ -13,7 +10,7 @@ public class Main {
 		service.sayHello("zfp");
 
 //		FileSystemXmlApplicationContext context1 = new FileSystemXmlApplicationContext("spring.xml");
-//		HelloService service = context1.getBean(HelloService.class);
+//		startup.HelloService service = context1.getBean(startup.HelloService.class);
 //		service.sayHello("zfp");
 	}
 }
